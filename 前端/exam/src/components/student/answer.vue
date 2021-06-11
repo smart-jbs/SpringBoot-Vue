@@ -88,6 +88,9 @@
           </div>
         </div>
       </transition>
+
+
+
       <!-- 模块之间的连接开始-->
       <div class="lines">
         <ul class="lis">
@@ -95,7 +98,6 @@
           <li v-show="flag1"></li>
           <li v-show="flag1"></li>
           <li v-show="flag1"></li>
-          
         </ul>
         <div class="circle">
           <span v-show="flag1"></span>
@@ -106,10 +108,12 @@
           <span v-show="flag1"></span>
           <span v-show="flag1"></span>
           <span v-show="flag1"></span>
-         
         </div>
       </div>
       <!-- 模块之间的连接结束 -->
+
+
+
       <!--右边选择答题区-->
       <transition name="slider-fade">
         <div class="right">
@@ -144,7 +148,7 @@
                 <el-radio :label="3">(C) {{showAnswer.answerC}}</el-radio>
                 <el-radio :label="4">(D) {{showAnswer.answerD}}</el-radio>
               </el-radio-group>
-             
+
             </div>
             <div class="fill" v-if="currentType == 2">
               <div v-for="(item,currentIndex) in part" :key="currentIndex">
@@ -155,7 +159,7 @@
                   @blur="fillBG"
                 ></el-input>
               </div>
-             
+
             </div>
             <div class="judge" v-if="currentType == 3">
               <el-radio-group
@@ -166,7 +170,7 @@
                 <el-radio :label="1">正确</el-radio>
                 <el-radio :label="2">错误</el-radio>
               </el-radio-group>
-              
+
             </div>
           </div>
           <!-- 右边内容开始-->
@@ -243,8 +247,8 @@ export default {
       judgeAnswer: [], //保存所有判断题答案
       topic1Answer: [], //学生选择题作答编号,
       rightAnswer: "",//数据库正确答案
-     
-     
+
+
     };
   },
 
@@ -293,7 +297,7 @@ export default {
         //解构赋值,将获得的数据数组解开一个个参数
         this.examData = { ...res.data.data }; //获取考试详情
         //  console.log(this.examData);
-        
+
         this.index = 0;
         this.time = this.examData.totalTime; //获取分钟数
         this.showTime();
@@ -302,7 +306,7 @@ export default {
           //通过paperId获取试题题目信息
           this.topic = { ...res.data };
           // console.log(this.topic[1][1]);//一个选择题的所有相关信息
-          
+
           let reduceAnswer = this.topic[1][this.index];
           this.reduceAnswer = reduceAnswer;
           let keys = Object.keys(this.topic); //对象转数组
@@ -357,7 +361,7 @@ export default {
         this.fill(this.index);
       }
     },
-   
+
     fill(index) {
       //2.填空题
       let len = this.topic[2].length;
@@ -393,7 +397,7 @@ export default {
         this.fillAnswer[this.index][3] = true;
        this.next()
       }
-     
+
     },
     judge(index) {
       //3.判断题
@@ -537,8 +541,8 @@ export default {
         }
       });
       console.log(`目前总分${finalScore}`);
-     
-     
+
+
             this.$message('考试时间到，自动交卷！！');
             let date = new Date();
             this.endTime = this.getTime(date);
@@ -571,7 +575,7 @@ export default {
             });
 
     },
-  
+
     commit() {
       //答案提交计算分数
       /* 1.计算选择题总分 */
@@ -727,10 +731,10 @@ export default {
         if (time == 0) {
           console.log("考试时间已到,强制交卷。");
           clearInterval(times);
-          
+
           this.autoCommit();
 					times = null
-          
+
         }
       }, 1000);
     }
